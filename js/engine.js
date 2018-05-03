@@ -154,6 +154,7 @@ var Engine = (function(global) {
         });
 
         player.render();
+        
     }
 
     /* This function does nothing but it could have been a good place to
@@ -161,7 +162,11 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
+        if (player.lives > 0) {
+            console.log(player.lives);
+            player.x = 202;
+            player.y = 405;
+        }
     }
 
     /* Go ahead and load all of the images we know we're going to need to
