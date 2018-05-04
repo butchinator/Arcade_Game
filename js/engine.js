@@ -24,6 +24,7 @@ var Engine = (function(global) {
         ctx = canvas.getContext('2d'),
         lastTime;
 
+
     canvas.width = 505;
     canvas.height = 606;
     doc.body.appendChild(canvas);
@@ -154,19 +155,73 @@ var Engine = (function(global) {
         });
 
         player.render();
+        renderLives();
+        displayScore();
+        gameOverScreen()
         
     }
+
+    function renderLives() {
+        ctx.drawImage(Resources.get("images/Heart.png"), 0, 530, 65, 95);
+        ctx.font = "bold 30px Arial";
+        ctx.fillStyle = "white";
+        ctx.textAlign = "center";
+        ctx.fillText(player.lives, 32, 590);
+
+    }
+
+    function displayScore() {
+        // ctx.font = '35px Open Sans';
+        // ctx.fillStyle = 'black';
+        // ctx.textAlign = 'left';
+        // ctx.fillText("Score:", 0, 0);
+        // // ctx.fillText(player.score, 0, -15);
+        ctx.font = "bold 25px Open Sans";
+        ctx.fillStyle = "black";
+        ctx.textAlign = "left";
+        ctx.fillText("SCORE:", 0, 40);
+        ctx.fillText(player.score, 100, 40);
+
+    };
+
+    function gameOverScreen() {
+        if (player.lives === 0) {
+            ctx.fillStyle = "black";
+            ctx.fillRect(0,0,505,606);
+            ctx.fillStyle = "#fff";
+            ctx.textAlign = "center";
+            ctx.font = "70px VT323";
+            ctx.fillText("GAME OVER", canvas.width / 2, 195);
+
+            ctx.font = "55px VT323";
+            ctx.fillText("SCORE:", canvas.width / 2, 280);
+            ctx.fillText(player.score, 327, 280);
+            
+            ctx.font = "40px VT323";
+            ctx.fillText("SPACEBAR to play again!", canvas.width / 2, 375);
+
+            
+        }
+    }
+
+    WebFont.load({
+        google: {
+          families: ['VT323', 'Open Sans', 'Open Sans:bold']
+        },
+        active: function() {
+          displayText();
+        }
+    });
+
+    
+
 
     /* This function does nothing but it could have been a good place to
      * handle game reset states - maybe a new game menu or a game over screen
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        if (player.lives > 0) {
-            console.log(player.lives);
-            player.x = 202;
-            player.y = 405;
-        }
+        //
     }
 
     /* Go ahead and load all of the images we know we're going to need to
@@ -178,7 +233,8 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/Heart.png'
     ]);
     Resources.onReady(init);
 

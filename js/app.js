@@ -53,13 +53,13 @@ var Player = function(x, y) {
 };
 
 Player.prototype.update = function() {
-    if (this.y < 10) {
+    if (this.y < 0) {
         this.noMoreMoves = true;
         setTimeout(() => {
             this.x = 202;
             this.y = 405;
             this.noMoreMoves = false;
-        }, 500);
+        }, 400);
             
     }
 };

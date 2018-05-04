@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML5 Canvas</title>
+</head>
+<body>
+    <canvas id="c" width="500" height="500"> </canvas>
+
+    <script>
+        var c = document.querySelector("#c");
+        var ctx = c.getContext("2d");
+        ctx.strokeRect(0,0,250,250);
+
+        var imgData = ctx.getImageData(0,0,250,250);
+
+        console.log(imgData);
+
+
+        paintGreen = function(imgData){
+                var numPixel = imgData.data.length/4;
+                for (var i = 1; i <= numPixel; i++) {
+                    if (i % 10 === 0) {
+                        imgData.data[i * 4 - 3] = 255;  //green
+                        imgData.data[i * 4 - 1] = 255;  //alpha
+                }}
+                ctx.putImageData(imgData,0,0);
+        }
+
+        paintGreen(imgData);
+
+        
+        // var c = document.querySelector("#c");
+        // var ctx = c.getContext("2d");
+
+        // ctx.fillStyle = "blue";
+        // ctx.fillRect(0,0,250,250);
+
+        // // Save state with blue fill
+        // ctx.save();
+        // ctx.fillStyle = "green";
+        // ctx.fillRect(100,100,10,10);
+        // // Restore to blue fill
+        // ctx.restore();
+
+        // ctx.fillRect(200,10,20,20);
+
+
+        // ctx.fillStyle = "blue";
+        // ctx.fillRect(0,0,50,50);
+
+        // ctx.fillStyle = "green"
+        // ctx.fillRect(100,100,10,10);
+
+        // ctx.fillStyle = "blue";
+        // ctx.fillRect(200,10,20,20);
+
+        /* ctx.fillRect(100, 100, 75, 75);
+
+        ctx.strokeRect(50, 50, 50, 50);
+
+
+        ctx.beginPath();
+        ctx.moveTo(10, 10);
+        ctx.lineTo(50, 50);
+        ctx.lineTo(50, 10);
+        ctx.lineTo(10, 10);
+        ctx.fill();
+        ctx.stroke(); */
+
+        // ctx.strokeStyle = "#33cc33";
+
+        // ctx.strokeRect(50, 50, 100, 100)
+
+        // ctx.beginPath();
+        // ctx.moveTo(75, 75);
+        // ctx.lineTo(125, 125);
+        // ctx.lineTo(125, 75);
+        // // ctx.lineTo(75, 75); line of code unnecassary
+
+        // // ctx.fillStyle = "blue";
+        // ctx.fill();
+
+        // ctx.strokeText("Schools Out Right Now!", 50, 10);
+
+        // ctx.font = '36pt Impact';
+        // ctx.lineWidth = 3;
+        // ctx.textAlign = "center";
+
+        // ctx.fillStyle = "white";
+        // ctx.fillText("CANVAS MEMES!", c.width / 2, 40);
+
+        // ctx.strokeStyle = "black";
+        // ctx.strokeText('CANVAS MEMES!', c.width / 2, 40);
+
+
+
+        // ctx.scale(2,3);
+        // ctx.translate(20,40);
+        // // ctx.rotate(angleRadians);
+
+
+
+
+        
+
+    </script>
+</body>
+</html>
