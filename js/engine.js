@@ -171,21 +171,16 @@ var Engine = (function(global) {
     }
 
     function displayScore() {
-        // ctx.font = '35px Open Sans';
-        // ctx.fillStyle = 'black';
-        // ctx.textAlign = 'left';
-        // ctx.fillText("Score:", 0, 0);
-        // // ctx.fillText(player.score, 0, -15);
         ctx.font = "bold 25px Open Sans";
         ctx.fillStyle = "black";
         ctx.textAlign = "left";
         ctx.fillText("SCORE:", 0, 40);
         ctx.fillText(player.score, 100, 40);
-
     };
 
     function gameOverScreen() {
         if (player.lives === 0) {
+            player.gameOver = true;
             ctx.fillStyle = "black";
             ctx.fillRect(0,0,505,606);
             ctx.fillStyle = "#fff";
@@ -200,7 +195,16 @@ var Engine = (function(global) {
             ctx.font = "40px VT323";
             ctx.fillText("SPACEBAR to play again!", canvas.width / 2, 375);
 
+            document.addEventListener('keyup', function(e) {
+    
+                if (e.keyCode === 32) {
+                    console.log("spacebar clicked");
+                    player.lives = 3;
+                    player.score = 0;
+                    player.gameOver = false;
+                }
             
+            });
         }
     }
 
@@ -208,9 +212,9 @@ var Engine = (function(global) {
         google: {
           families: ['VT323', 'Open Sans', 'Open Sans:bold']
         },
-        active: function() {
-          displayText();
-        }
+        // active: function() {
+        //   displayText();
+        // }
     });
 
     
